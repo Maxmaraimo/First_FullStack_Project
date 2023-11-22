@@ -15,7 +15,7 @@ export default function Navigation() {
             <nav className='main-navbar'>
                 <div className="upper-nav">
                     <div className="left-nav">
-                        <a href="mailto:alisherxujanov163@gmail.com">
+                        <a href="mailto:ozodbekmahmaraimov16@gmail.com">
                             <img src={emailVector} width="15" height="15" alt="" />
                             ozodbekmahmaraimov16@gmail.com
                         </a>
