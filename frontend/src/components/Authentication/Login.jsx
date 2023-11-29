@@ -1,32 +1,74 @@
 import Eye from "../../assets/icons/Eye.png";
 import { useState } from "react";
-import { axiosCall,  accessTokenIsValid, refreshTokenLS} from "../../conf/axios.js";
+import { axiosCall, accessTokenIsValid, refreshTokenLS } from '../../conf/axios.js'
 import { ACCESS_TOKEN_KEY, REFRESH_TOKEN_KEY } from "../../conf/common.js";
+import { toast } from 'react-toastify'
 
 function Login(props) {
     const [showPassword, setShowPassword] = useState(false);
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [error, setError] = useState({})
 
     // Create the submit method.
     const submit = async e => {
         e.preventDefault();
+        if (username.length === 0 || password.length === 0) {
+            toast.warm("All fields are required.", {toastId: 2})
+            return
+        }else if (error.usernameErr || error.passwordErr) {
+            toast.warm("Please fix the errors.", {toastId: 3})
+            return
+        }
+
+        
         const user = {
             'username': username,
             'password': password
         }
         const data = await axiosCall('api/token/create/', user, null, "POST")
+        if (data.response?.status === 401) {
+            toast.error("Incorrect credentials", {toastId: '1'})
+        }
+        localStorage.clear()
         localStorage.setItem(ACCESS_TOKEN_KEY, data.access)
         localStorage.setItem(REFRESH_TOKEN_KEY, data.refresh)
     };
 
-    function fireSetUsername(e) { setUsername(e.target.value); }
-    function fireSetPassword(e) { setPassword(e.target.value); }
+    const PATTERN = /^[a-zA-Z0-9]+$/;
+    function fireSetUsername(e) {
+        const val = e.target.value
+        if (val.length !== 0) {
+            if (!PATTERN.test(val)) {
+                setError({ ...error, usernameErr: 'Никнейм может содержать только латинские буквы и цифры' })
+            } else {
+                setError({ ...error, usernameErr: '' })
+            }
+        } else {
+            setError({ ...error, usernameErr: '' })
+        }
+        setUsername(val) 
+    } 
+    function fireSetPassword(e) {
+        const val = e.target.value
 
+        if (val.length !== 0) {
+            if (!PATTERN.test(val)) {
+                setError({ ...error, passwordErr: 'Пароль может содержать только латинские буквы и цифры' })
+            } else {
+                setError({ ...error, passwordErr: '' })
+            }
+        } else {
+            setError({ ...error, passwordErr: '' })
+        }
 
+        setPassword(val) 
+    } 
+
+    
     return (
         <div>
-            <form className="form-group" onSubmit={submit}>
+            <form className="auth-form" onSubmit={submit}>
                 <div>
                     <input
                         type="text"
@@ -34,6 +76,9 @@ function Login(props) {
                         onChange={fireSetUsername}
                         placeholder="Никнейм или электронная почта"
                     />
+                    <p className="error">
+                        {error.usernameErr}
+                    </p>
                 </div>
                 <div>
                     <input
@@ -44,10 +89,13 @@ function Login(props) {
                         placeholder="Пароль"
                     />
                     <img src={Eye} onClick={() => { setShowPassword(!showPassword) }} alt="" />
+                    <p className="error">
+                        {error.passwordErr}
+                    </p>
                 </div>
-                <p className='помошник'>
+                <p className='forget-password'>
                     <span>Забыли пароль?</span>
-                    <a className='восстановить' href='#'>Восстановить</a>
+                    <a className='Recover' href='#'>Восстановить</a>
                 </p>
                 <button className='войти'>Войти</button>
             </form>

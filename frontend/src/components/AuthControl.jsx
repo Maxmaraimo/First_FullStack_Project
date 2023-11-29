@@ -9,7 +9,7 @@ export default function AuthControl(Component) {
 
         useEffect(() => {
             if (!isLoggedIn()) {
-                toast("You are not logged in!", { toastId: 'success1'})
+                toast("You are not logged in!", { toastId: '1'})
                 navigate('/auth')
             }
         }, [navigate])
