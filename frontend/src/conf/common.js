@@ -1,3 +1,4 @@
+
 const ACCESS_TOKEN_KEY = 'access_token';
 const REFRESH_TOKEN_KEY = 'refresh_token';
 
@@ -6,7 +7,12 @@ function isLoggedIn() {
     return token !== null;
 }
 
+function logoutEntirely() {
+    localStorage.clear()
+}
+
 export {
+    logoutEntirely,
     isLoggedIn,
     ACCESS_TOKEN_KEY,
     REFRESH_TOKEN_KEY

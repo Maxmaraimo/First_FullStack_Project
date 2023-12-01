@@ -44,7 +44,7 @@ export default function Navigation() {
                         {
                             isLoggedIn()
                                 ?
-                                (<Link to={"/#profile"}>
+                                (<Link to={"/profile"}>
                                     Profile
                                     <img src={profileVector} alt="Vector" width={15} height={15} />
                                 </Link>)
