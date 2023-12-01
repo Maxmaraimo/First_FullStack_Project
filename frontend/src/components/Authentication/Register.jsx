@@ -1,87 +1,115 @@
 import Eye from "../../assets/icons/Eye.png";
 import { useState } from "react";
-function Register(props) {
-    let [showPassword, setShowPassword] = useState(false);
 
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
-    const [password2, setPassword2] = useState('');
-    const [email, setEmail] = useState('');
-    const [error, setError] = useState({})
+
+function Register(props) {
+    let [showPassword, setShowPassword] = useState(false)
+
+    const [username, setUsername] = useState('')
+    const [password, setPassword] = useState('')
+    const [password2, setPassword2] = useState('')
+    const [email, setEmail] = useState('')
+    const [errors, setError] = useState({})
 
     const PATTERN = /^[a-zA-Z0-9]+$/;
-
 
     function fireSetUsername(e) {
         const val = e.target.value
         if (val.length !== 0) {
             if (!PATTERN.test(val)) {
-                setError({ ...error, usernameErr: 'Никнейм может содержать только латинские буквы и цифры' })
+                setError({ ...errors, usernameErr: 'Никнейм может содержать только латинские буквы и цифры' })
             } else {
-                setError({ ...error, usernameErr: '' })
+                setError({ ...errors, usernameErr: '' })
             }
         } else {
-            setError({ ...error, usernameErr: '' })
+            setError({ ...errors, usernameErr: '' })
         }
-        setUsername(val)
-    }
+        setUsername(val) 
+    } 
     function fireSetPassword(e) {
         const val = e.target.value
         const inputName = e.target.name
 
-
-        let errName = inputName === "password" ? 'password2Err' : 'password2Err'
-        // if (inputName === 'password') {
-        //     errName = 'password2Err'
-        // }else {
-        //     errName = 'password2Err'
-        //     return errName
-        // }
+     
+        let errName = inputName === "password"  ?  'passwordErr' : 'password2Err'
 
         if (val.length !== 0) {
             if (!PATTERN.test(val)) {
-                setError({ ...error, [errName]: 'Пароль может содержать только латинские буквы и цифры' })
+                setError({ ...errors, [errName]: 'Пароль может содержать только латинские буквы и цифры' })
             } else {
-                setError({ ...error, [errName]: '' })
+                setError({ ...errors, [errName]: '' })
             }
         } else {
-            setError({ ...error, [errName]: '' })
+            setError({ ...errors, [errName]: '' })
         }
 
-
-        inputName === "password" ? setPassword(val) : setPassword2(val)
-        
+        inputName === "password"  ?  setPassword(val) : setPassword2(val) 
+    } 
+    function fireSetEmail(e) {
+        e.preventDefault()
+        // const emailPattern = /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/
+        const val = e.target.value
+        // if (val.length !== 0) {
+        //     if (!emailPattern.test(val)) {
+        //         setError({ ...errors, emailErr: 'Некорректный email' })
+        //     } else {
+        //         setError({ ...errors, emailErr: '' })
+        //     }
+        // } else {
+        //     setError({ ...errors, emailErr: '' })
+        // }
+        setEmail(val)
     }
-
 
 
     return (
         <div>
-            <div className="form-group">
+            <form className="auth-form">
                 <div>
-                    <input type="text" id="register-name-input" placeholder="Введите никнейм" />
-                    <input type="text" id="register-email-input" placeholder="Электронная почта" pattern='^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$' />
+                    <input 
+                        type="text" id="register-name-input" 
+                        placeholder="Введите никнейм" 
+                        onChange={fireSetUsername}
+                    />
+                    <p className="error">
+                        {errors.usernameErr}
+                    </p>
+
+                    <input type="email" id="register-email-input" placeholder="Электронная почта" 
+                        onChange={fireSetEmail}
+                    />
+                    <p className="error">
+                        {errors.emailErr}
+                    </p>
                 </div>
                 <div>
-                    <input
-                        id="register-pass-input"
-                        type={showPassword ? "text" : "password"}
-                        className="pass-input"
-                        placeholder="Придумайте пароль"
+                    <input 
+                        id="register-pass-input" 
+                        type={showPassword ? "text" : "password"} 
+                        className="pass-input" 
+                        placeholder="Придумайте пароль" 
                         name="password"
+                        onChange={fireSetPassword}
                     />
                     <img src={Eye} onClick={() => { setShowPassword(!showPassword) }} alt="" />
+                    <p className="error">
+                        {errors.passwordErr}
+                    </p>
                 </div>
                 <div>
-                    <input
-                        id="pass2-input"
-                        type="password"
-                        placeholder="Повторите пароль"
+                    <input 
+                        id="pass2-input" 
+                        type="password" 
+                        placeholder="Повторите пароль" 
                         name="password2"
+                        onChange={fireSetPassword}
                     />
+                    <p className="error">
+                        {errors.password2Err}
+                    </p>
                 </div>
                 <button className='войти'>Создать</button>
-            </div>
+            </form>
         </div>
     );
 }
