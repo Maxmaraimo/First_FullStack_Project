@@ -10,9 +10,9 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
+import os
 from pathlib import Path
 from datetime import timedelta
-import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -22,7 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-4m*)ld91j2=q_(%z%t=q=@4op*iwu(t4pfbu(er)jla)kbqd1-'
+SECRET_KEY = 'django-insecure-ks+vea-9#(c=f%pm3c=u3g76+boa9pb6d)c=hydz--5(2owifg'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -44,8 +44,9 @@ INSTALLED_APPS = [
     'users',
     'rest_framework',
     'corsheaders',
+    'rest_framework.authtoken',
     'rest_framework_simplejwt',
-    # 'rest_framework_authtoken',
+    'rest_framework_simplejwt.token_blacklist',
 ]
 
 MIDDLEWARE = [
@@ -64,7 +65,7 @@ CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOW_METHODS = ["DELETE", "GET", "OPTIONS", "PATCH", "POST", "PUT"]
 CORS_ALLOW_HEADERS = [
     "accept",  "accept-encoding",  "authorization",  "content-type",  "dnt",  "origin",
-    "user-agent",   "x-csrftoken",   "x-requested-with",   
+    "user-agent",   "x-csrftoken",   "x-requested-with",
 ]
 
 # LOGIN_REDIRECT_URL = 'home_page'
@@ -151,7 +152,6 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
 
 
 REST_FRAMEWORK = {

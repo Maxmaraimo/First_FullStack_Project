@@ -13,28 +13,27 @@ function Login(props) {
     // Create the submit method.
     const submit = async e => {
         e.preventDefault();
-        if (username.length === 0 || password.length === 0) {
-            toast.warm("All fields are required.", {toastId: 2})
+        if (username.length === 0   ||   password.length === 0) {
+            toast.warn("All fields are required.", {toastId: 2})
             return
-        }else if (error.usernameErr || error.passwordErr) {
-            toast.warm("Please fix the errors.", {toastId: 3})
+        } else if (error.usernameErr || error.passwordErr) {
+            toast.warn("Please fix the errors.", {toastId: 3})
             return
         }
-
-        
         const user = {
             'username': username,
             'password': password
         }
         const data = await axiosCall('api/token/create/', user, null, "POST")
         if (data.response?.status === 401) {
-            toast.error("Incorrect credentials", {toastId: '1'})
+            toast.error("Incorrect credentials", {toastId: 1})
+        } else {
+            localStorage.clear()
+            localStorage.setItem(ACCESS_TOKEN_KEY, data.access)
+            localStorage.setItem(REFRESH_TOKEN_KEY, data.refresh)
+            toast.success("Successfully logged in", {toastId: 4})
+            props.navigate('/')
         }
-        localStorage.clear()
-        localStorage.setItem(ACCESS_TOKEN_KEY, data.access)
-        localStorage.setItem(REFRESH_TOKEN_KEY, data.refresh)
-        toast.success("Successfully logged in", {toastId: 4})
-        props.navigate('/')
     };
 
     const PATTERN = /^[a-zA-Z0-9]+$/;

@@ -9,7 +9,6 @@ import Profile from './Profile'
 const AuthHome = AuthControl(Home)
 const AuthProfile = AuthControl(Profile)
 
-
 export default function AllComponents() {
   const location = useLocation()
   return (
