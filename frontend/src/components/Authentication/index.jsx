@@ -70,7 +70,7 @@ function Authentication(props) {
                     </div>
 
                     <div className='footer'>
-                        Создавая аккаунт в "Alisher Company", вы соглашаетесь с нашими 
+                        Создавая аккаунт в "Ozodbek Company", вы соглашаетесь с нашими 
                         <a href='#'>Условиями использования</a> и <a href='#'>Политикой конфиденциальности</a>
                     </div>
                 </div>
