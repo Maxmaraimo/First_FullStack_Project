@@ -9,6 +9,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   const [state, dispatch] = useReducer(globalReducer, initialState)
+  state.dispatch = dispatch
 
   return (
     <context.Provider value={state}>
