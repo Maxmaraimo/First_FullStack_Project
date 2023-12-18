@@ -7,3 +7,4 @@ Here we can go step by step:
 
 - Official - [Django REST Framework](https://www.django-rest-framework.org/)
 - Official - [React.js](https://reactjs.org/)
+- end use stripe
