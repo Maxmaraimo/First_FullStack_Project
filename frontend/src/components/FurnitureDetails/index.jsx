@@ -29,8 +29,13 @@ function FurnitureDetails() {
 
     return (
         <div>
-            <h1>Name-{furniture.name}</h1>
-            <p>Description - {furniture.description}</p>
+            <img src={furniture.image} alt={furniture.image} />
+            <h2>Name-{furniture.name}</h2>
+            <h4>Description - {furniture.description}</h4>
+            <h4>color - {furniture.color}</h4>
+            <h4>price - {furniture.price}</h4>
+            <h4>quantity - {furniture.quantity}</h4>
+            <h4>category - {furniture.category}</h4>
         </div>
     );
 }

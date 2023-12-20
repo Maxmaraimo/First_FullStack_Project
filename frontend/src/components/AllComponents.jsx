@@ -26,6 +26,10 @@ export default function AllComponents() {
         <Route path='/products' element={<AuthProducts />} />
         <Route path='/wishlist' element={<AuthWishlist />} />
         <Route path='/furniture-details/:id' element={<AuthFurnitureDetails />} />
+        {/* 
+          To get the user to details-page we use:
+            /details/:id
+        */}
         <Route path="*" element={<NoPage />} />
       </Route>
     </Routes>

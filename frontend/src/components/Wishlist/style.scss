@@ -1,9 +1,10 @@
 .wishlist-wrapper {
     .wishlist-items {
+        width: 100%;
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 10px;
-        
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 20px;
+
         .wishlist-item-wrapper {
             background-color: #eee;
             border-radius: 10px;

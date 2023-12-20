@@ -14,7 +14,7 @@ function globalReducer(state, action) {
         case "NotAuth":
             return { ...state, isAuth: false }
         case "setWishlist":
-            return { ...state, wishlist: action.payload}
+            return { ...state, wishlist: action.payload }
         default:
             throw new Error("Unexpected action")
     }

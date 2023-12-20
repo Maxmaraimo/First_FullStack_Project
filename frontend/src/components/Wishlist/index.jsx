@@ -4,6 +4,7 @@ import { axiosCall } from '../../conf/axios'
 import { BASE_URL, context } from "../../conf/store"
 import { Link } from "react-router-dom"
 
+
 function Wishlist(props) {
     const state = useContext(context)
 
@@ -17,7 +18,7 @@ function Wishlist(props) {
             type: "setWishlist",
             payload: response
         })
-        console.log(response);
+        console.log(state)
     }
 
     useEffect(() => {
@@ -34,18 +35,19 @@ function Wishlist(props) {
                         state.wishlist.map((item, index) => {
                             return (
                                 <Link to={`/furniture-details/${item.id}`}>
-                                <div key={index}
-                                    className="wishlist-item-wrapper"
-                                >
-                                    <img
-                                        className="item-image"
-                                        src={BASE_URL + item.image}
-                                        alt={item.name}
-                                    />
-                                    <h2>Name: {item.name}</h2>
-                                    <p>Description: {item.description}</p>
-                                    <p>Category: {item.category}</p>
-                                </div>
+                                    <div key={index}
+                                        className="wishlist-item-wrapper"
+                                    >
+                                        <img
+                                            className="item-image"
+                                            src={BASE_URL + item.image}
+                                            alt={item.name}
+                                            width={"100%"}
+                                        />
+                                        <h2>Name: {item.name}</h2>
+                                        <p>Description: {item.description}</p>
+                                        <p>Category: {item.category}</p>
+                                    </div>
                                 </Link>
                             )
                         })
@@ -53,7 +55,6 @@ function Wishlist(props) {
                         <p>Your wishlist is empty!</p>
                 }
             </div>
-
         </div>
     );
 }
