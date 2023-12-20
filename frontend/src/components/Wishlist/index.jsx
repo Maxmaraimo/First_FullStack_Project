@@ -34,8 +34,8 @@ function Wishlist(props) {
                     state.wishlist.length > 0 ?
                         state.wishlist.map((item, index) => {
                             return (
-                                <Link to={`/furniture-details/${item.id}`}>
-                                    <div key={index}
+                                <Link key={index} to={`/furniture-details/${item.id}`}>
+                                    <div
                                         className="wishlist-item-wrapper"
                                     >
                                         <img
@@ -47,6 +47,10 @@ function Wishlist(props) {
                                         <h2>Name: {item.name}</h2>
                                         <p>Description: {item.description}</p>
                                         <p>Category: {item.category}</p>
+
+                                        <span onClick={delFromWishlist} className="del-item">
+                                            &times;
+                                        </span>
                                     </div>
                                 </Link>
                             )
