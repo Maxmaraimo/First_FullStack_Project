@@ -1,18 +1,28 @@
+@import "../../assets/Styles/settings";
+
 .wishlist-wrapper {
-    *{
-        text-decoration: none;
+    margin: 0 100px;
+
+    h1 {
+        margin: 0 50px;
     }
+
     .wishlist-items {
+        * {
+            text-decoration: none;
+            color: darkblue;
+        }
         width: 100%;
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
         gap: 20px;
 
         .wishlist-item-wrapper {
-            background-color: #eee;
+            background-color: $light-violet;
             border-radius: 10px;
             padding: 5px;
             position: relative;
+            margin: 10px;
 
             .del-item {
                 display: flex;
@@ -22,13 +32,17 @@
                 border-radius: 10px;
                 width: 40px;
                 height: 40px;
-                background-color: darkblue;
+                font-size: 2em;
+                text-decoration: none;
+                background-color: $danger-t;
                 color: snow;
                 position: absolute;
                 right: 5px;
                 bottom: 5px;
+                z-index: 100;
                 &:hover {
-                    background-color: red;
+                    background-color: $danger;
+                    transform: scale(1.1);
                 }
             }
         }
