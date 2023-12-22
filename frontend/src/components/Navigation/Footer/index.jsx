@@ -44,7 +44,7 @@ export default function Footer() {
                 <p><Link to={'/#Category'}>Category</Link></p>
                 <p><Link to={'/#Pre-Built Pages'}>Pre-Built Pages</Link></p>
                 <p><Link to={'/#Visual Composer Elements'}>Visual Composer Elements</Link></p>
-                <p><Link to={'/#WooCommerce Pages'}>WooCommerce Pages</Link></p>
+                <p><Link to={'/#WooCommerce Pages'}>Hello I'm Ozodbek and I create this project</Link></p>
             </div>
         </div>
     </div>
